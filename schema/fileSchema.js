@@ -1,15 +1,18 @@
 const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 const fileSchema = new mongoose.Schema({
-    path: {
+    userID: {
         type: String,
         required: true
     },
-    loginUsers: 
-        {
-            type: Schema.Types.ObjectId, ref: 'loginUser'
-        }
-    
+    name: {
+        type: String,
+        required: true
+    },
+    path: {
+        type: String,
+        required: true
+    }
 });
 
 module.exports.fileSchema = fileSchema;

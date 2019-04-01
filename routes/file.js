@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {fileModel} = require("../schema/fileSchema");
+const { fileModel } = require("../schema/fileSchema");
 var fs = require("fs");
 
 const baseUrl1 = "./public/files/";
@@ -22,20 +22,17 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-    
+
     for (let key in req.files) {
-        console.log("Key = " + key + " value: " + req.files[key]);
         let File = req.files[key];
-        var newpath = baseUrl1 + File.name;
-        console.log("Req ", req.session.userID);
-        
+        var newpath = req.session.userID + "#" + File.name;
         const file = new fileModel({
-            path: newpath,
-            loginUser: req.session.userID
+            userID: req.session.userID,
+            name: File.name,
+            path: newpath
         });
         await file.save();
-        console.log("Name of the file", File.name);
-        fs.copyFile(File.path, newpath, (err) => {
+        fs.copyFile(File.path, baseUrl1 + newpath, (err) => {
             if (err) throw err;
         });
     }

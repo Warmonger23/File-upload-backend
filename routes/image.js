@@ -13,7 +13,6 @@ router.get("/", (req, res, next) => {
         if (err) {
             res.send({ code: "404", data: err });
         }
-        console.log("Items", items);
         let result = items.map(item => {
             return { key: baseUrl2 + item, value: item };
         });
@@ -23,8 +22,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-    console.log("Multiple Images", req.files);
-    console.log("Length of the images", req.files.length);
+    console.log("This is req.session". req.session);
     for (let key in req.files) {
         console.log("Key = " + key + " value: " + req.files[key]);
         let File = req.files[key];

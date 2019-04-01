@@ -51,7 +51,6 @@ app.use("/image", image);
 app.use("/video", video);
 app.use("/signout", signout);
 app.use("/validUser", function (req, res, next) {
-  console.log("Valid User ->", req.session);
   if (req.session.userID) {
     res.result = "User is authorized";
     next();
@@ -68,7 +67,6 @@ app.listen(PORT, () => {
 app.use(function (req, res, next) {
   let currTime = process.hrtime();
   res.setHeader("timeTaken", (currTime[1] - res.reqTime) / 1000000);
-  console.log("res result", res.result);
   let data;
   if (res.error) {
     data = {
@@ -89,8 +87,6 @@ app.use(function (req, res, next) {
 
 function parse_with_formidable() {
   return (req, res, next) => {
-    console.log("Inside parse with form");
-    console.log(req.session)
     let form = new formidable.IncomingForm();
     form.maxFileSize = 20000 * 1024 * 1024;
     form.parse(req, (err, fields, files) => {
