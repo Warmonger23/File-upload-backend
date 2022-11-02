@@ -1,4 +1,4 @@
-Backend server hosting various endpoints for file upload of users. 
+Backend server hosting endpoints for file upload of users. 
 
 It has various end points supporting the following actions
 1. Creating users
